@@ -42,6 +42,7 @@ jobs:
       original-owner: "docker"
       repo-name: "login-action"
       base_branch: ${{ inputs.base_branch }}
+      mode: ${{ github.event_name == 'pull_request' && 'verify' || inputs.mode }}
       package_manager: ${{inputs.package_manager || 'yarn' }}
       script: ${{ inputs.script || 'yarn build' }}
       yarn_version: ${{ inputs.yarn_version || '4.9.2' }}
