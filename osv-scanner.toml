@@ -1,0 +1,3 @@
+[[IgnoredVulns]]
+id = "GHSA-v6h2-p8h4-qcjw"
+reason = "No user-controlled input reaches the brace-expansion code"
