@@ -29,7 +29,7 @@
     "@aws-sdk/client-ecr": "^3.890.0",
     "@aws-sdk/client-ecr-public": "^3.890.0",
     "@docker/actions-toolkit": "^0.69.0",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "http-proxy-agent": "^7.0.2",
     "https-proxy-agent": "^7.0.6",
     "js-yaml": "^4.1.1"
