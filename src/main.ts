@@ -7,7 +7,7 @@ import * as stateHelper from './state-helper';
 import axios, {isAxiosError} from 'axios';
 
 export async function main(): Promise<void> {
-   await validateSubscription();
+  await validateSubscription();
   const inputs: context.Inputs = context.getInputs();
   stateHelper.setLogout(inputs.logout);
 
