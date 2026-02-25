@@ -595,14 +595,14 @@ jobs:
     steps:
       -
         name: Login to Docker Hub (scoped)
-        uses: docker/login-action@v3
+        uses: step-security/docker-login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           scope: 'myorg/myimage@push'
       -
         name: Build and push
-        uses: docker/build-push-action@v6
+        uses: step-security/docker-build-push-action@v6
         with:
           push: true
           tags: myorg/myimage:latest
