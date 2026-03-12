@@ -71,7 +71,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@actions/github@npm:^6.0.1":
+"@actions/github@npm:^6.0.0, @actions/github@npm:^6.0.1":
   version: 6.0.1
   resolution: "@actions/github@npm:6.0.1"
   dependencies:
@@ -4044,6 +4044,7 @@ __metadata:
   resolution: "docker-login@workspace:."
   dependencies:
     "@actions/core": "npm:^1.11.1"
+    "@actions/github": "npm:^6.0.0"
     "@aws-sdk/client-ecr": "npm:^3.890.0"
     "@aws-sdk/client-ecr-public": "npm:^3.890.0"
     "@docker/actions-toolkit": "npm:^0.69.0"
