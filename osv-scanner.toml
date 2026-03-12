@@ -1,3 +1,7 @@
 [[IgnoredVulns]]
 id = "GHSA-v6h2-p8h4-qcjw"
 reason = "No user-controlled input reaches the brace-expansion code"
+
+[[IgnoredVulns]]
+id = "GHSA-g9mf-h72j-4rw9"
+reason = "Not exploitable in production: undici's fetch() API is not used by this action; HTTP calls go through @octokit/rest and axios which use their own HTTP clients."
