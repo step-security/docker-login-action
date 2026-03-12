@@ -26,6 +26,7 @@
   "packageManager": "yarn@4.9.2",
   "dependencies": {
     "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
     "@aws-sdk/client-ecr": "^3.890.0",
     "@aws-sdk/client-ecr-public": "^3.890.0",
     "@docker/actions-toolkit": "^0.69.0",
@@ -36,7 +37,7 @@
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^20.19.9",
+    "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@vercel/ncc": "^0.38.3",

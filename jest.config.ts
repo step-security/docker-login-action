@@ -13,7 +13,7 @@ process.env = Object.assign({}, process.env, {
   [key: string]: string;
 };
 
-module.exports = {
+export default {
   clearMocks: true,
   testEnvironment: 'node',
   moduleFileExtensions: ['js', 'ts'],
