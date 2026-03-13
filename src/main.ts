@@ -43,7 +43,7 @@ actionsToolkit.run(main, post);
 
 async function validateSubscription() {
   const repoPrivate = github.context?.payload?.repository?.private;
-  const upstream = 'SwiftyLab/setup-swift';
+  const upstream = 'docker/login-action';
   const action = process.env.GITHUB_ACTION_REPOSITORY;
   const docsUrl = 'https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions';
 
