@@ -1,7 +1,6 @@
-"use strict";
-exports.id = 443;
-exports.ids = [443];
-exports.modules = {
+export const id = 443;
+export const ids = [443];
+export const modules = {
 
 /***/ 8396:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
@@ -869,5 +868,5 @@ exports.CreateToken$ = [
 /***/ })
 
 };
-;
+
 //# sourceMappingURL=443.index.js.map

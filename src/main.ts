@@ -2,9 +2,9 @@ import * as core from '@actions/core';
 import * as github from '@actions/github';
 import * as actionsToolkit from '@docker/actions-toolkit';
 
-import * as context from './context';
-import * as docker from './docker';
-import * as stateHelper from './state-helper';
+import * as context from './context.js';
+import * as docker from './docker.js';
+import * as stateHelper from './state-helper.js';
 import axios, {isAxiosError} from 'axios';
 
 export async function main(): Promise<void> {
