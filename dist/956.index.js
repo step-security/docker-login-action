@@ -1,7 +1,6 @@
-"use strict";
-exports.id = 956;
-exports.ids = [956];
-exports.modules = {
+export const id = 956;
+export const ids = [956];
+export const modules = {
 
 /***/ 88079:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
@@ -148,5 +147,5 @@ Object.keys(fromWebToken).forEach(function (k) {
 /***/ })
 
 };
-;
+
 //# sourceMappingURL=956.index.js.map

@@ -1,16 +1,13 @@
 {
   "name": "docker-login",
   "description": "GitHub Action to login against a Docker registry",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "ncc build src/main.ts --source-map --minify --license licenses.txt",
-    "lint": "yarn run prettier && yarn run eslint",
-    "format": "yarn run prettier:fix && yarn run eslint:fix",
-    "eslint": "eslint --max-warnings=0 .",
-    "eslint:fix": "eslint --fix .",
-    "prettier": "prettier --check \"./**/*.ts\"",
-    "prettier:fix": "prettier --write \"./**/*.ts\"",
-    "test": "jest"
+    "lint": "eslint --max-warnings=0 .",
+    "format": "eslint --fix .",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -25,30 +22,31 @@
   "license": "Apache-2.0",
   "packageManager": "yarn@4.9.2",
   "dependencies": {
-    "@actions/core": "^1.11.1",
+    "@actions/core": "^3.0.0",
     "@actions/github": "6.0.1",
-    "@aws-sdk/client-ecr": "^3.1027.0",
-    "@aws-sdk/client-ecr-public": "^3.1027.0",
-    "@docker/actions-toolkit": "^0.69.0",
+    "@aws-sdk/client-ecr": "^3.1000.0",
+    "@aws-sdk/client-ecr-public": "^3.1000.0",
+    "@docker/actions-toolkit": "^0.77.0",
     "axios": "^1.15.0",
     "http-proxy-agent": "^7.0.2",
     "https-proxy-agent": "^7.0.6",
     "js-yaml": "^4.1.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.3",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^24.0.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@types/node": "^24.11.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
     "@vercel/ncc": "^0.38.4",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^9.1.2",
-    "eslint-plugin-jest": "^28.14.0",
-    "eslint-plugin-prettier": "^5.5.4",
-    "jest": "^30.2.0",
-    "prettier": "^3.6.2",
-    "ts-jest": "^29.4.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/eslint-plugin": "^1.6.9",
+    "eslint": "^9.39.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.3.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }

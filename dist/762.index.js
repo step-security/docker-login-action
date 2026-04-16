@@ -1,7 +1,6 @@
-"use strict";
-exports.id = 762;
-exports.ids = [762];
-exports.modules = {
+export const id = 762;
+export const ids = [762];
+export const modules = {
 
 /***/ 77709:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
@@ -248,7 +247,7 @@ var middlewareEndpoint = __webpack_require__(40099);
 var middlewareRetry = __webpack_require__(19618);
 var smithyClient = __webpack_require__(61411);
 var httpAuthSchemeProvider = __webpack_require__(77709);
-var runtimeConfig = __webpack_require__(455);
+var runtimeConfig = __webpack_require__(22836);
 var regionConfigResolver = __webpack_require__(36463);
 var protocolHttp = __webpack_require__(72356);
 var schemas_0 = __webpack_require__(60890);
@@ -498,7 +497,7 @@ exports.ValidationException = ValidationException;
 
 /***/ }),
 
-/***/ 455:
+/***/ 22836:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -755,5 +754,5 @@ module.exports = /*#__PURE__*/JSON.parse('{"name":"@aws-sdk/nested-clients","ver
 /***/ })
 
 };
-;
+
 //# sourceMappingURL=762.index.js.map
