@@ -12,7 +12,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@actions/artifact@npm:^6.2.0":
+"@actions/artifact@npm:^6.2.1":
   version: 6.2.1
   resolution: "@actions/artifact@npm:6.2.1"
   dependencies:
@@ -181,7 +181,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-ecr-public@npm:^3.1000.0":
+"@aws-sdk/client-ecr-public@npm:^3.1020.0":
   version: 3.1030.0
   resolution: "@aws-sdk/client-ecr-public@npm:3.1030.0"
   dependencies:
@@ -228,7 +228,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-ecr@npm:^3.1000.0":
+"@aws-sdk/client-ecr@npm:^3.1020.0":
   version: 3.1030.0
   resolution: "@aws-sdk/client-ecr@npm:3.1030.0"
   dependencies:
@@ -869,11 +869,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docker/actions-toolkit@npm:^0.77.0":
-  version: 0.77.0
-  resolution: "@docker/actions-toolkit@npm:0.77.0"
+"@docker/actions-toolkit@npm:^0.86.0":
+  version: 0.86.0
+  resolution: "@docker/actions-toolkit@npm:0.86.0"
   dependencies:
-    "@actions/artifact": "npm:^6.2.0"
+    "@actions/artifact": "npm:^6.2.1"
     "@actions/cache": "npm:^6.0.0"
     "@actions/core": "npm:^3.0.0"
     "@actions/exec": "npm:^3.0.0"
@@ -882,11 +882,11 @@ __metadata:
     "@actions/io": "npm:^3.0.2"
     "@actions/tool-cache": "npm:^4.0.0"
     "@sigstore/bundle": "npm:^4.0.0"
-    "@sigstore/sign": "npm:^4.1.0"
-    "@sigstore/tuf": "npm:^4.0.1"
+    "@sigstore/sign": "npm:^4.1.1"
+    "@sigstore/tuf": "npm:^4.0.2"
     "@sigstore/verify": "npm:^3.1.0"
     async-retry: "npm:^1.3.3"
-    csv-parse: "npm:^6.1.0"
+    csv-parse: "npm:^6.2.1"
     gunzip-maybe: "npm:^1.4.2"
     handlebars: "npm:^4.7.8"
     he: "npm:^1.2.0"
@@ -895,7 +895,7 @@ __metadata:
     semver: "npm:^7.7.4"
     tar-stream: "npm:^3.1.7"
     tmp: "npm:^0.2.5"
-  checksum: 10/f3ae817a5a6827efc63d1a1730e918801a8fa33867cda72bd7a1f78309631c45d91de60bc57985c7520fae168e96daed0fcab0003b5fab9b50bdd7aa355d651b
+  checksum: 10/89d65c4a48de7474d7356520b452a1f9ff1931e6bcb2b810a2e14b4b6efcdc1fb7d0d22771e94289b58ee57040a77792306a13dc898b2aa7e083124bee102f18
   languageName: node
   linkType: hard
 
@@ -1485,7 +1485,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sigstore/sign@npm:^4.1.0":
+"@sigstore/sign@npm:^4.1.1":
   version: 4.1.1
   resolution: "@sigstore/sign@npm:4.1.1"
   dependencies:
@@ -1499,7 +1499,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sigstore/tuf@npm:^4.0.1":
+"@sigstore/tuf@npm:^4.0.2":
   version: 4.0.2
   resolution: "@sigstore/tuf@npm:4.0.2"
   dependencies:
@@ -2429,6 +2429,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"agent-base@npm:8.0.0":
+  version: 8.0.0
+  resolution: "agent-base@npm:8.0.0"
+  checksum: 10/a660ae60d389c4ce0f5a178efd5e6ebeefeddf0f6defbb105c638056ec0ebd3828d00d029cf5b26e3ce52d09c393735bf9c187ed1000a0be2c6cf5d95ac15bff
+  languageName: node
+  linkType: hard
+
 "agent-base@npm:^7.1.0, agent-base@npm:^7.1.1, agent-base@npm:^7.1.2":
   version: 7.1.3
   resolution: "agent-base@npm:7.1.3"
@@ -2869,10 +2876,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-parse@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "csv-parse@npm:6.1.0"
-  checksum: 10/607d92611435fdfb7631242644a2582bfb218fad8c6c6d6416db31647c2e63a3110f16c9837de6baaa3edf318212765cfc6e72d672d99690fd7f565d6c93d6f4
+"csv-parse@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "csv-parse@npm:6.2.1"
+  checksum: 10/7fbde1225c6df6aaea01a202934e1f15ce16ed55e544ead0d066b0c4dc9ae1a2fc881b412889cbf115cd74cbf14ea17388b394e8a31e05cb412dd7dc6114bebd
   languageName: node
   linkType: hard
 
@@ -2914,9 +2921,10 @@ __metadata:
   resolution: "docker-login@workspace:."
   dependencies:
     "@actions/core": "npm:^3.0.0"
-    "@aws-sdk/client-ecr": "npm:^3.1000.0"
-    "@aws-sdk/client-ecr-public": "npm:^3.1000.0"
-    "@docker/actions-toolkit": "npm:^0.77.0"
+    "@actions/github": "npm:6.0.1"
+    "@aws-sdk/client-ecr": "npm:^3.1020.0"
+    "@aws-sdk/client-ecr-public": "npm:^3.1020.0"
+    "@docker/actions-toolkit": "npm:^0.86.0"
     "@eslint/js": "npm:^9.39.3"
     "@types/js-yaml": "npm:^4.0.9"
     "@types/node": "npm:^24.11.0"
@@ -2930,8 +2938,8 @@ __metadata:
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-prettier: "npm:^5.5.5"
     globals: "npm:^17.3.0"
-    http-proxy-agent: "npm:^7.0.2"
-    https-proxy-agent: "npm:^7.0.6"
+    http-proxy-agent: "npm:^8.0.0"
+    https-proxy-agent: "npm:^8.0.0"
     js-yaml: "npm:^4.1.1"
     prettier: "npm:^3.8.1"
     typescript: "npm:^5.9.3"
@@ -3638,7 +3646,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-proxy-agent@npm:^7.0.0, http-proxy-agent@npm:^7.0.2":
+"http-proxy-agent@npm:^7.0.0":
   version: 7.0.2
   resolution: "http-proxy-agent@npm:7.0.2"
   dependencies:
@@ -3648,13 +3656,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"https-proxy-agent@npm:^7.0.0, https-proxy-agent@npm:^7.0.1, https-proxy-agent@npm:^7.0.6":
+"http-proxy-agent@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "http-proxy-agent@npm:8.0.0"
+  dependencies:
+    agent-base: "npm:8.0.0"
+    debug: "npm:^4.3.4"
+  checksum: 10/ad68856d85c58b654cbe238dc00dde177b5085271e2ff174be65c5b58f6f4e782199683771e8c6b697127620da5dda6643008fd508627414950261a482416347
+  languageName: node
+  linkType: hard
+
+"https-proxy-agent@npm:^7.0.0, https-proxy-agent@npm:^7.0.1":
   version: 7.0.6
   resolution: "https-proxy-agent@npm:7.0.6"
   dependencies:
     agent-base: "npm:^7.1.2"
     debug: "npm:4"
   checksum: 10/784b628cbd55b25542a9d85033bdfd03d4eda630fb8b3c9477959367f3be95dc476ed2ecbb9836c359c7c698027fc7b45723a302324433590f45d6c1706e8c13
+  languageName: node
+  linkType: hard
+
+"https-proxy-agent@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "https-proxy-agent@npm:8.0.0"
+  dependencies:
+    agent-base: "npm:8.0.0"
+    debug: "npm:^4.3.4"
+  checksum: 10/0de830cb33a47d521783479ef6d1ff256c7bfcee7109bbda279c66bb1ba220ef025a2f25b73e187d9cbf5691a2dd9336a779b389f9fdd29ad772f1dbc51aaaf0
   languageName: node
   linkType: hard
 
