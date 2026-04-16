@@ -1,5 +1,6 @@
+import * as fs from 'fs';
+
 import * as core from '@actions/core';
-import * as github from '@actions/github';
 import * as actionsToolkit from '@docker/actions-toolkit';
 
 import * as context from './context.js';
@@ -42,7 +43,14 @@ async function post(): Promise<void> {
 actionsToolkit.run(main, post);
 
 async function validateSubscription() {
-  const repoPrivate = github.context?.payload?.repository?.private;
+  const eventPath = process.env.GITHUB_EVENT_PATH;
+  let repoPrivate: boolean | undefined;
+
+  if (eventPath && fs.existsSync(eventPath)) {
+    const eventData = JSON.parse(fs.readFileSync(eventPath, 'utf8'));
+    repoPrivate = eventData?.repository?.private;
+  }
+
   const upstream = 'docker/login-action';
   const action = process.env.GITHUB_ACTION_REPOSITORY;
   const docsUrl = 'https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions';
