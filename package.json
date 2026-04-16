@@ -26,11 +26,11 @@
   "packageManager": "yarn@4.9.2",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0",
-    "@aws-sdk/client-ecr": "^3.1000.0",
-    "@aws-sdk/client-ecr-public": "^3.1000.0",
+    "@actions/github": "6.0.1",
+    "@aws-sdk/client-ecr": "^3.1027.0",
+    "@aws-sdk/client-ecr-public": "^3.1027.0",
     "@docker/actions-toolkit": "^0.69.0",
-    "axios": "^1.13.5",
+    "axios": "^1.15.0",
     "http-proxy-agent": "^7.0.2",
     "https-proxy-agent": "^7.0.6",
     "js-yaml": "^4.1.1"
