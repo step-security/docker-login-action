@@ -20,13 +20,13 @@
   ],
   "author": "step-security",
   "license": "Apache-2.0",
-  "packageManager": "yarn@4.9.2",
+  "packageManager": "yarn@4.15.0",
   "dependencies": {
     "@actions/core": "^3.0.0",
     "@aws-sdk/client-ecr": "^3.1020.0",
     "@aws-sdk/client-ecr-public": "^3.1020.0",
     "@docker/actions-toolkit": "^0.86.0",
-    "axios": "^1.15.0",
+    "axios": "^1.16.1",
     "http-proxy-agent": "^8.0.0",
     "https-proxy-agent": "^8.0.0",
     "js-yaml": "^4.1.1"
