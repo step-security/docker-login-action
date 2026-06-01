@@ -1,0 +1,4 @@
+[[IgnoredVulns]]
+id = "GHSA-v2v4-37r5-5v8g"
+ignoreUntil = 2026-12-01
+reason = "XSS in ip-address Address6.group(), link(), spanAll(), and parseMessage only triggers when their HTML output is rendered via innerHTML. This is a GitHub Action with no HTML rendering surface, so the vulnerability is not exploitable."
