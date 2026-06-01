@@ -23,7 +23,7 @@ on:
         description: "Specify a yarn version"
         required: false
         type: string  
-        default: "4.9.2"
+        default: "4.15.0"
 
   pull_request:
     types: [opened, synchronize, labeled]
@@ -45,5 +45,5 @@ jobs:
       mode: ${{ github.event_name == 'pull_request' && 'verify' || inputs.mode }}
       package_manager: ${{inputs.package_manager || 'yarn' }}
       script: ${{ inputs.script || 'yarn build' }}
-      yarn_version: ${{ inputs.yarn_version || '4.9.2' }}
+      yarn_version: ${{ inputs.yarn_version || '4.15.0' }}
 
