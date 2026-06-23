@@ -2997,7 +2997,7 @@ __metadata:
     globals: "npm:^17.3.0"
     http-proxy-agent: "npm:^9.0.0"
     https-proxy-agent: "npm:^9.0.0"
-    js-yaml: "npm:^4.1.1"
+    js-yaml: "npm:^4.2.0"
     prettier: "npm:^3.8.1"
     typescript: "npm:^5.9.3"
     vitest: "npm:^4.0.18"
@@ -4127,7 +4127,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^4.1.0":
+"js-yaml@npm:^4.1.0, js-yaml@npm:^4.2.0":
   version: 4.2.0
   resolution: "js-yaml@npm:4.2.0"
   dependencies:
