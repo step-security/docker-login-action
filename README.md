@@ -118,6 +118,8 @@ instead of a password.
 
 ### Azure Container Registry (ACR)
 
+#### Service principal
+
 [Create a service principal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-auth-service-principal#create-a-service-principal)
 with access to your container registry through the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 and take note of the generated service principal's ID (also called _client ID_)
@@ -141,6 +143,53 @@ jobs:
           registry: <registry-name>.azurecr.io
           username: ${{ vars.AZURE_CLIENT_ID }}
           password: ${{ secrets.AZURE_CLIENT_SECRET }}
+```
+
+> Replace `<registry-name>` with the name of your registry.
+
+#### OpenID Connect (OIDC)
+
+To authenticate with OpenID Connect, configure a federated identity credential
+for GitHub Actions and use the [Azure Login](https://github.com/Azure/login)
+action to sign in to Azure. Then expose an ACR access token and pass it to this
+action as the password.
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches: main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Azure
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      -
+        name: Get ACR access token
+        id: acr-token
+        run: |
+          ACR_TOKEN=$(az acr login --name <registry-name> --expose-token --output tsv --query accessToken)
+          echo "::add-mask::$ACR_TOKEN" # mask the token in workflow logs
+          echo "token=$ACR_TOKEN" >> "$GITHUB_OUTPUT"
+      -
+        name: Login to ACR
+        uses: docker/login-action@v4
+        with:
+          registry: <registry-name>.azurecr.io
+          username: 00000000-0000-0000-0000-000000000000
+          password: ${{ steps.acr-token.outputs.token }}
 ```
 
 > Replace `<registry-name>` with the name of your registry.
