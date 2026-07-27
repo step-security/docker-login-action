@@ -4,7 +4,7 @@
   "type": "module",
   "main": "src/main.ts",
   "scripts": {
-    "build": "esbuild src/main.ts --bundle --platform=node --target=node24 --format=cjs --outfile=dist/index.cjs --sourcemap --minify && yarn run license",
+    "build": "esbuild src/main.ts --bundle --platform=node --target=node24 --format=cjs --outfile=dist/index.cjs --sourcemap --minify --keep-names && yarn run license",
     "lint": "eslint --max-warnings=0 .",
     "format": "eslint --fix .",
     "test": "vitest run",
@@ -24,13 +24,15 @@
   "packageManager": "yarn@4.9.2",
   "dependencies": {
     "@actions/core": "^3.0.1",
-    "@aws-sdk/client-ecr": "^3.1050.0",
-    "@aws-sdk/client-ecr-public": "^3.1050.0",
-    "@docker/actions-toolkit": "^0.90.0",
+    "@actions/http-client": "^4.0.1",
+    "@aws-sdk/client-ecr": "^3.1091.0",
+    "@aws-sdk/client-ecr-public": "^3.1091.0",
+    "@docker/actions-toolkit": "^0.94.0",
     "axios": "^1.16.0",
-    "http-proxy-agent": "^9.0.0",
-    "https-proxy-agent": "^9.0.0",
-    "js-yaml": "^4.1.1"
+    "http-proxy-agent": "^9.1.0",
+    "https-proxy-agent": "^9.1.0",
+    "js-yaml": "^5.2.1",
+    "uuid": "^14.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.3",

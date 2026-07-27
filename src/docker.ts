@@ -4,12 +4,20 @@ import {Docker} from '@docker/actions-toolkit/lib/docker/docker.js';
 
 import * as aws from './aws.js';
 import * as context from './context.js';
+import * as dockerhub from './dockerhub.js';
 
 export async function login(auth: context.Auth): Promise<void> {
   if (/true/i.test(auth.ecr) || (auth.ecr == 'auto' && aws.isECR(auth.registry))) {
     await loginECR(auth.registry, auth.username, auth.password, auth.scope);
   } else {
-    await loginStandard(auth.registry, auth.username, auth.password, auth.scope);
+    let username = auth.username;
+    let password = auth.password;
+    if (dockerhub.isDockerHubOIDC(auth.registry, password)) {
+      const credentials = await dockerhub.getOIDCToken(auth.registry, username);
+      username = credentials.username;
+      password = credentials.token;
+    }
+    await loginStandard(auth.registry, username, password, auth.scope);
   }
 }
 
