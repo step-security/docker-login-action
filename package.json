@@ -34,6 +34,10 @@
     "js-yaml": "^5.2.1",
     "uuid": "^14.0.1"
   },
+  "resolutions": {
+    "@azure/storage-blob": "12.31.0",
+    "@azure/storage-common": "12.3.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.3",
     "@types/js-yaml": "^4.0.9",
