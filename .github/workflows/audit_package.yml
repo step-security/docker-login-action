@@ -20,7 +20,7 @@ on:
         description: "Specify a yarn version"
         required: false
         type: string  
-        default: "4.9.2"
+        default: "4.15.0"
 
   schedule:
     - cron: "0 0 * * 1"
@@ -32,7 +32,7 @@ jobs:
       base_branch: ${{ inputs.base_branch || 'main' }}
       package_manager: ${{inputs.package_manager || 'yarn' }}
       script: ${{ inputs.script || 'yarn build' }}
-      yarn_version: ${{ inputs.yarn_version || '4.9.2' }}
+      yarn_version: ${{ inputs.yarn_version || '4.15.0' }}
 
 permissions:
   contents: write
