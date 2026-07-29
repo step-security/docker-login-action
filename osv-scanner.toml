@@ -1,0 +1,7 @@
+[[IgnoredVulns]]
+id = "GHSA-mh99-v99m-4gvg"
+reason = "brace-expansion (ReDoS) is a transitive dep via @docker/actions-toolkit -> @actions/cache -> @actions/glob -> minimatch@3/5 and @actions/artifact -> archiver -> readdir-glob -> minimatch@5/9. Upstream packages (@actions/cache@6.2.0 and @actions/artifact@6.2.1) still pin the unfixed versions; no resolution is available without forking. Exploitability is negligible: glob patterns in this action come exclusively from workflow YAML (trusted repo-owner input), so a ReDoS attack requires the same access as arbitrary code execution via run: steps."
+
+[[IgnoredVulns]]
+id = "GHSA-v2v4-37r5-5v8g"
+reason = "ip-address is a transitive dep of generate-license-file (devDependency only) via @npmcli/arborist -> pacote -> sigstore -> make-fetch-happen -> socks-proxy-agent -> socks. It is never bundled into dist/index.cjs and has no runtime exposure."
