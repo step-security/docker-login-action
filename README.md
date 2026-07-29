@@ -203,7 +203,7 @@ jobs:
     steps:
       -
         name: Login to Azure
-        uses: azure/login@v3
+        uses: step-security/azure-login@v3
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
@@ -217,7 +217,7 @@ jobs:
           echo "token=$ACR_TOKEN" >> "$GITHUB_OUTPUT"
       -
         name: Login to ACR
-        uses: docker/login-action@v4
+        uses: step-security/docker-login-action@v4
         with:
           registry: <registry-name>.azurecr.io
           username: 00000000-0000-0000-0000-000000000000
@@ -458,7 +458,7 @@ jobs:
     steps:
       -
         name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: step-security/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
