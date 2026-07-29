@@ -29,6 +29,7 @@ ___
   * [Set scopes for the authentication token](#set-scopes-for-the-authentication-token)
 * [Customizing](#customizing)
   * [inputs](#inputs)
+  * [environment variables](#environment-variables)
 * [Contributing](#contributing)
 
 ## Usage
@@ -56,6 +57,36 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+```
+
+You can also [authenticate to Docker Hub with OpenID Connect](https://docs.docker.com/enterprise/security/oidc-connections/)
+when your Docker Hub organization has an OIDC connection configured. The
+workflow must grant the `id-token: write` permission, pass the Docker Hub
+organization name as `username`, omit `password`, and set the OIDC connection
+ID in `DOCKERHUB_OIDC_CONNECTIONID` environment variable.
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches: main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Docker Hub
+        uses: step-security/docker-login-action@v4
+        env:
+          DOCKERHUB_OIDC_CONNECTIONID: ${{ vars.DOCKERHUB_OIDC_CONNECTIONID }}
+        with:
+          username: ${{ vars.DOCKERHUB_ORGANIZATION }}
 ```
 
 ### GitHub Container Registry
@@ -118,6 +149,8 @@ instead of a password.
 
 ### Azure Container Registry (ACR)
 
+#### Service principal
+
 [Create a service principal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-auth-service-principal#create-a-service-principal)
 with access to your container registry through the [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 and take note of the generated service principal's ID (also called _client ID_)
@@ -143,10 +176,60 @@ jobs:
           password: ${{ secrets.AZURE_CLIENT_SECRET }}
 ```
 
+> [!NOTE]
+> Replace `<registry-name>` with the name of your registry.
+
+#### OpenID Connect (OIDC)
+
+To authenticate with OpenID Connect, configure a federated identity credential
+for GitHub Actions and use the [Azure Login](https://github.com/Azure/login)
+action to sign in to Azure. Then expose an ACR access token and pass it to this
+action as the password.
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches: main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Azure
+        uses: step-security/azure-login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      -
+        name: Get ACR access token
+        id: acr-token
+        run: |
+          ACR_TOKEN=$(az acr login --name <registry-name> --expose-token --output tsv --query accessToken)
+          echo "::add-mask::$ACR_TOKEN" # mask the token in workflow logs
+          echo "token=$ACR_TOKEN" >> "$GITHUB_OUTPUT"
+      -
+        name: Login to ACR
+        uses: step-security/docker-login-action@v4
+        with:
+          registry: <registry-name>.azurecr.io
+          username: 00000000-0000-0000-0000-000000000000
+          password: ${{ steps.acr-token.outputs.token }}
+```
+
+> [!NOTE]
 > Replace `<registry-name>` with the name of your registry.
 
 ### Google Container Registry (GCR)
 
+> [!NOTE]
 > [Google Artifact Registry](#google-artifact-registry-gar) is the evolution of
 > Google Container Registry. As a fully-managed service with support for both
 > container images and non-container artifacts. If you currently use Google
@@ -191,9 +274,10 @@ jobs:
         password: ${{ steps.auth.outputs.access_token }}
 ```
 
+> [!NOTE]
 > Replace `<workload_identity_provider>` with configured workload identity
 > provider. For steps to configure, [see here](https://github.com/step-security/google-github-auth#setting-up-workload-identity-federation).
-
+>
 > Replace `<service_account>` with configured service account in workload
 > identity provider which has access to push to GCR
 
@@ -262,12 +346,13 @@ jobs:
           password: ${{ steps.auth.outputs.access_token }}
 ```
 
+> [!NOTE]
 > Replace `<workload_identity_provider>` with configured workload identity
 > provider
-
+>
 > Replace `<service_account>` with configured service account in workload
 > identity provider which has access to push to GCR
-
+>
 > Replace `<location>` with the regional or multi-regional [location](https://cloud.google.com/artifact-registry/docs/repo-organize#locations)
 > of the repository where the image is stored.
 
@@ -299,6 +384,7 @@ jobs:
           password: ${{ secrets.GAR_JSON_KEY }}
 ```
 
+> [!NOTE]
 > Replace `<location>` with the regional or multi-regional [location](https://cloud.google.com/artifact-registry/docs/repo-organize#locations)
 > of the repository where the image is stored.
 
@@ -353,6 +439,7 @@ jobs:
           AWS_ACCOUNT_IDS: 012345678910,023456789012
 ```
 
+> [!NOTE]
 > Only available with [AWS CLI version 1](https://docs.aws.amazon.com/cli/latest/reference/ecr/get-login.html)
 
 You can also use the [Configure AWS Credentials](https://github.com/aws-actions/configure-aws-credentials)
@@ -371,7 +458,7 @@ jobs:
     steps:
       -
         name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: step-security/configure-aws-credentials@v6
         with:
           aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -383,6 +470,7 @@ jobs:
           registry: <aws-account-number>.dkr.ecr.<region>.amazonaws.com
 ```
 
+> [!NOTE]
 > Replace `<aws-account-number>` and `<region>` with their respective values.
 
 ### AWS Public Elastic Container Registry (ECR)
@@ -414,6 +502,7 @@ jobs:
           AWS_REGION: <region>
 ```
 
+> [!NOTE]
 > Replace `<region>` with its respective value (default `us-east-1`).
 
 ### OCI Oracle Cloud Infrastructure Registry (OCIR)
@@ -446,6 +535,7 @@ jobs:
           password: ${{ secrets.OCI_TOKEN }}
 ```
 
+> [!NOTE]
 > Replace `<region>` with their respective values from [availability regions](https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryprerequisites.htm#Availab)
 
 ### Quay.io
@@ -559,6 +649,38 @@ jobs:
               password: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+Docker Hub OIDC can also be used with `registry-auth`. Grant `id-token: write`,
+set `DOCKERHUB_OIDC_CONNECTIONID`, pass the Docker Hub organization name as
+`username`, and omit `password` for the Docker Hub object:
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches: main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to registries
+        uses: step-security/docker-login-action@v4
+        env:
+          DOCKERHUB_OIDC_CONNECTIONID: ${{ vars.DOCKERHUB_OIDC_CONNECTIONID }}
+        with:
+          registry-auth: |
+            - username: ${{ vars.DOCKERHUB_ORGANIZATION }}
+            - registry: ghcr.io
+              username: ${{ github.actor }}
+              password: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ### Set scopes for the authentication token
 
 The `scope` input allows limiting registry credentials to a specific repository
@@ -604,7 +726,7 @@ jobs:
           scope: 'myorg/myimage@push'
       -
         name: Build and push
-        uses: step-security/docker-build-push-action@v6
+        uses: step-security/docker-build-push-action@v7
         with:
           push: true
           tags: myorg/myimage:latest
@@ -631,3 +753,12 @@ The following inputs can be used as `step.with` keys:
 
 > [!NOTE]
 > The `registry-auth` input cannot be used with other inputs except `logout`.
+
+### environment variables
+
+The following environment variables can be set as `step.env` keys:
+
+| Name                          | Type   | Default | Description                                                                 |
+|-------------------------------|--------|---------|-----------------------------------------------------------------------------|
+| `DOCKERHUB_OIDC_CONNECTIONID` | String |         | Docker Hub OIDC connection ID. Required for Docker Hub OIDC login           |
+| `DOCKERHUB_OIDC_EXPIREIN`     | Number | `300`   | Docker Hub OIDC token lifetime in seconds. Must be between `300` and `3600` |

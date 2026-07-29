@@ -53,7 +53,9 @@ export function getAuthList(inputs: Inputs): Array<Auth> {
     });
   } else {
     auths = (yaml.load(inputs.registryAuth) as Array<Auth>).map(auth => {
-      core.setSecret(auth.password); // redacted in workflow logs
+      if (auth.password) {
+        core.setSecret(auth.password); // redacted in workflow logs
+      }
       const registry = auth.registry || 'docker.io';
       return {
         registry,
