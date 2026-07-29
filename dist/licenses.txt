@@ -2831,7 +2831,7 @@ software or this license, under any kind of legal claim._**
 
 The following npm package may be included in this product:
 
- - axios@1.16.0
+ - axios@1.18.0
 
 This package contains the following license:
 
@@ -4741,9 +4741,11 @@ terms above.
 The following npm packages may be included in this product:
 
  - @nodable/entities@2.1.1
+ - agent-base@6.0.2
  - binary@0.3.0
  - browserify-zlib@0.1.4
  - eastasianwidth@0.2.0
+ - https-proxy-agent@5.0.1
  - is-gzip@1.0.0
  - isarray@1.0.0
  - proxy-agent-negotiate@1.1.0
