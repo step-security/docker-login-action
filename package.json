@@ -4,7 +4,7 @@
   "type": "module",
   "main": "src/main.ts",
   "scripts": {
-    "build": "esbuild src/main.ts --bundle --platform=node --target=node24 --format=cjs --outfile=dist/index.cjs --sourcemap --minify --keep-names && yarn run license",
+    "build": "esbuild src/main.ts --bundle --platform=node --target=node24 --format=cjs --outfile=dist/index.cjs --sourcemap --minify --keep-names --define:import.meta.url=__importMetaUrl '--banner:js=const __importMetaUrl=require(\"url\").pathToFileURL(__filename).href;' && yarn run license",
     "lint": "eslint --max-warnings=0 .",
     "format": "eslint --fix .",
     "test": "vitest run",
@@ -33,10 +33,6 @@
     "https-proxy-agent": "^9.1.0",
     "js-yaml": "^5.2.1",
     "uuid": "^14.0.1"
-  },
-  "resolutions": {
-    "@azure/storage-blob": "12.31.0",
-    "@azure/storage-common": "12.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.3",
