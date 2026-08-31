@@ -681,6 +681,38 @@ jobs:
               password: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+Docker Hub OIDC can also be used with `registry-auth`. Grant `id-token: write`,
+set `DOCKERHUB_OIDC_CONNECTIONID`, pass the Docker Hub organization name as
+`username`, and omit `password` for the Docker Hub object:
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches: main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to registries
+        uses: docker/login-action@v4
+        env:
+          DOCKERHUB_OIDC_CONNECTIONID: ${{ vars.DOCKERHUB_OIDC_CONNECTIONID }}
+        with:
+          registry-auth: |
+            - username: ${{ vars.DOCKERHUB_ORGANIZATION }}
+            - registry: ghcr.io
+              username: ${{ github.actor }}
+              password: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ### Set scopes for the authentication token
 
 The `scope` input allows limiting registry credentials to a specific repository
