@@ -73,6 +73,25 @@ test('getAuthList supports password-less Docker Hub registry-auth for OIDC', asy
   });
 });
 
+test('getAuthList supports password-less Docker Hub registry-auth for OIDC', async () => {
+  const [auth] = getAuthList({
+    registry: '',
+    username: '',
+    password: '',
+    scope: '',
+    ecr: '',
+    logout: true,
+    registryAuth: '- username: docker-org\n'
+  });
+
+  expect(auth).toMatchObject({
+    registry: 'docker.io',
+    username: 'docker-org',
+    password: undefined,
+    ecr: 'auto'
+  });
+});
+
 test('getAuthList masks registry-auth password when present', async () => {
   const stdoutWriteSpy = vi.spyOn(process.stdout, 'write').mockImplementation(() => true);
   getAuthList({
