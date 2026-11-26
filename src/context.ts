@@ -62,7 +62,7 @@ export function getAuthList(inputs: Inputs): Array<Auth> {
         username: auth.username,
         password: auth.password,
         scope: auth.scope,
-        ecr: auth.ecr || 'auto',
+        ecr: String(auth.ecr ?? '') || 'auto',
         configDir: scopeToConfigDir(registry, auth.scope)
       };
     });
@@ -77,8 +77,11 @@ export function scopeToConfigDir(registry: string, scope?: string): string {
   if (scopeDisabled() || !scope || scope === '') {
     return '';
   }
+  const schemeEnd = registry.indexOf('://');
+  // A neutral scheme preserves explicit ports, including HTTP(S) default ports.
+  const registryHost = schemeEnd === -1 ? registry : new URL(`registry://${registry.slice(schemeEnd + 3)}`).host;
   const configRoot = path.resolve(Buildx.configDir, 'config');
-  const registryDir = path.resolve(configRoot, registry === 'docker.io' ? 'registry-1.docker.io' : registry);
+  const registryDir = path.resolve(configRoot, registryHost === 'docker.io' ? 'registry-1.docker.io' : registryHost);
   if (!isChildPath(configRoot, registryDir)) {
     throw new Error(`Invalid registry '${registry}': resolved config path escapes the Buildx config directory`);
   }

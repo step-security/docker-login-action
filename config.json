@@ -1,0 +1,17 @@
+{
+  "$comment": "Managed automatically when syncing with upstream. Do not edit by hand.",
+  "schema_version": 1,
+  "onboarding_type": "copied",
+  "action_type": "node",
+  "upstream": {
+    "repository": "docker/login-action",
+    "synced_tag": "v4.8.0",
+    "synced_commit": "8aa5831fb8d48d8f76594c7ddde61ae58019f550",
+    "archived": false
+  },
+  "build": {
+    "package_manager": "yarn@4.15.0",
+    "node_version": "24",
+    "script": "build"
+  }
+}

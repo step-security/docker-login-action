@@ -5,6 +5,7 @@ import {beforeEach, describe, expect, test, vi} from 'vitest';
 import * as dockerhub from '../src/dockerhub.js';
 
 vi.mock('@actions/core', () => ({
+  debug: vi.fn(),
   getIDToken: vi.fn(),
   info: vi.fn(),
   setSecret: vi.fn()
@@ -81,15 +82,24 @@ describe('getOIDCToken', () => {
     expect(body.get('subject_token_type')).toBe('urn:ietf:params:oauth:token-type:id_token');
     expect(body.get('subject_token')).toBe('github-id-token');
     expect(body.get('connection_id')).toBe(validConnectionID);
-    expect(body.get('expires_in')).toBe('300');
+    expect(body.get('expires_in')).toBe('3600');
     expect(setSecretMock).toHaveBeenCalledWith('hub-token');
+    expect(core.info).toHaveBeenCalledWith('Docker Hub OIDC detected for docker.io');
+    expect(core.info).toHaveBeenCalledWith('Retrieving GitHub OIDC token for Docker Hub');
+    expect(core.info).toHaveBeenCalledWith('Exchanging GitHub OIDC token for Docker Hub token');
+    expect(core.info).toHaveBeenCalledWith('Docker Hub OIDC token exchange succeeded');
+    expect(core.debug).toHaveBeenCalledWith('Docker Hub OIDC token audience: https://identity.docker.com');
+    expect(core.debug).toHaveBeenCalledWith('Docker Hub OIDC token expiration: 3600s');
+    expect(core.debug).toHaveBeenCalledWith('Sending Docker Hub OIDC token request to https://identity.docker.com/oauth/token');
+    expect(core.debug).toHaveBeenCalledWith('Docker Hub OIDC token request returned status code 200');
+    expect(core.debug).toHaveBeenCalledWith('Docker Hub OIDC token response status code: 200');
   });
 
   test('uses custom token expiration', async () => {
-    process.env.DOCKERHUB_OIDC_EXPIREIN = '900';
+    process.env.DOCKERHUB_OIDC_EXPIREIN = '21600';
     await dockerhub.getOIDCToken('docker.io', 'dbowie');
     const body = new URLSearchParams(postSpy.mock.calls[0][1]);
-    expect(body.get('expires_in')).toBe('900');
+    expect(body.get('expires_in')).toBe('21600');
   });
 
   test('uses stage identity host for stage registry', async () => {
@@ -112,9 +122,9 @@ describe('getOIDCToken', () => {
     expect(postSpy).not.toHaveBeenCalled();
   });
 
-  test.each(['not-a-number', '299', '3601'])('validates token expiration %p', async expiresIn => {
+  test.each(['not-a-number', '299', '21601'])('validates token expiration %p', async expiresIn => {
     process.env.DOCKERHUB_OIDC_EXPIREIN = expiresIn;
-    await expect(dockerhub.getOIDCToken('docker.io', 'dbowie')).rejects.toThrow(`Invalid DOCKERHUB_OIDC_EXPIREIN: ${expiresIn}. Must be between 300 and 3600`);
+    await expect(dockerhub.getOIDCToken('docker.io', 'dbowie')).rejects.toThrow(`Invalid DOCKERHUB_OIDC_EXPIREIN: ${expiresIn}. Must be between 300 and 21600`);
     expect(getIDTokenMock).not.toHaveBeenCalled();
     expect(postSpy).not.toHaveBeenCalled();
   });
