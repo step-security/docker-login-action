@@ -5,3 +5,11 @@ reason = "ip-address is a transitive dep of generate-license-file (devDependency
 [[IgnoredVulns]]
 id = "GHSA-mwp4-54f8-5fhr"
 reason = "ip-address is a transitive dep of generate-license-file (devDependency only) via @npmcli/arborist -> pacote -> sigstore -> make-fetch-happen -> socks-proxy-agent -> socks. It is never bundled into dist/index.cjs and has no runtime exposure."
+
+[[IgnoredVulns]]
+id = "GHSA-3g3m-2fjr-6pw4"
+reason = "glob 10.x/13.x are only used by generate-license-file (devDependency) and archiver-utils (not bundled into dist). No runtime exposure. Fix requires glob 14, blocked by upstream pins."
+
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+reason = "minimatch is used by dev tooling and by glob. The copy bundled via @actions/glob is never called with untrusted patterns by this action. Fix requires minimatch 11, blocked by upstream pins."
