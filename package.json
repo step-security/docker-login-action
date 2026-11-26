@@ -1,5 +1,6 @@
 {
-  "name": "docker-login",
+  "name": "@step-security/docker-login",
+  "private": true,
   "description": "GitHub Action to login against a Docker registry",
   "type": "module",
   "main": "src/main.ts",
@@ -20,19 +21,20 @@
     "login"
   ],
   "author": "step-security",
+  "publisher": "step-security",
   "license": "Apache-2.0",
   "packageManager": "yarn@4.15.0",
   "dependencies": {
     "@actions/core": "^3.0.1",
     "@actions/http-client": "^4.0.1",
-    "@aws-sdk/client-ecr": "^3.1095.0",
-    "@aws-sdk/client-ecr-public": "^3.1095.0",
-    "@docker/actions-toolkit": "^0.94.0",
-    "axios": "^1.18.0",
+    "@aws-sdk/client-ecr": "^3.1161.0",
+    "@aws-sdk/client-ecr-public": "^3.1161.0",
+    "@docker/actions-toolkit": "^0.109.0",
+    "axios": "^1.21.1",
     "http-proxy-agent": "^9.1.0",
     "https-proxy-agent": "^9.1.0",
-    "js-yaml": "^5.2.2",
-    "uuid": "^14.0.1"
+    "js-yaml": "^5.5.0",
+    "uuid": "^14.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.3",
@@ -51,5 +53,13 @@
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
+  },
+  "homepage": "https://github.com/step-security/docker-login-action#readme",
+  "bugs": {
+    "url": "https://github.com/step-security/docker-login-action/issues"
+  },
+  "engines": {
+    "node": ">=24",
+    "yarn": ">=4"
   }
 }

@@ -758,7 +758,12 @@ The following inputs can be used as `step.with` keys:
 
 The following environment variables can be set as `step.env` keys:
 
-| Name                          | Type   | Default | Description                                                                 |
-|-------------------------------|--------|---------|-----------------------------------------------------------------------------|
-| `DOCKERHUB_OIDC_CONNECTIONID` | String |         | Docker Hub OIDC connection ID. Required for Docker Hub OIDC login           |
-| `DOCKERHUB_OIDC_EXPIREIN`     | Number | `300`   | Docker Hub OIDC token lifetime in seconds. Must be between `300` and `3600` |
+| Name                          | Type   | Default | Description                                                                                        |
+|-------------------------------|--------|---------|----------------------------------------------------------------------------------------------------|
+| `DOCKERHUB_OIDC_CONNECTIONID` | String |         | Docker Hub OIDC connection ID. Required for Docker Hub OIDC login                                  |
+| `DOCKERHUB_OIDC_EXPIREIN`     | Number | `3600`  | Docker Hub OIDC token lifetime in seconds. Must be between `300` (5 minutes) and `21600` (6 hours) |
+
+## Contributing
+
+Want to contribute? Awesome! You can find information about contributing to
+this project in the [CONTRIBUTING.md](/.github/CONTRIBUTING.md)
